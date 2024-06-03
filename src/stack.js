@@ -25,7 +25,17 @@ class Stack {
       this.top.next = holdPointer;
     }
     this.length++;
-    console.log(this);
+    return this;
+  }
+  pop() {
+    if (this.length === 0) {
+      return this;
+    }
+    if (this.top.value === this.bottom.value) {
+      this.bottom = null;
+    }
+    this.top = this.top.next;
+    this.length--;
     return this;
   }
 }
@@ -35,3 +45,7 @@ myStack.push(5);
 myStack.push(6);
 myStack.push(7);
 myStack.push(2);
+myStack.pop();
+myStack.pop();
+myStack.pop();
+myStack.pop();
