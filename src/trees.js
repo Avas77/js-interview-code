@@ -88,6 +88,48 @@ class BinarySearchTree {
     }
     return list;
   }
+  breadthFirstSearchR(queue, list) {
+    if (!queue.length) {
+      return list;
+    }
+    let currentNode = queue.shift();
+    list.push(currentNode.value);
+    if (currentNode.left) {
+      queue.push(currentNode.left);
+    }
+    if (currentNode.right) {
+      queue.push(currentNode.right);
+    }
+    return this.breadthFirstSearchR(queue, list);
+  }
+  dfsInOrder() {
+    return traverseInorder(this.root, []);
+  }
+  dfsPreOrder() {
+    return traversePreOrder(this.root, []);
+  }
+}
+
+function traverseInorder(node, list) {
+  if (node.left) {
+    traverseInorder(node.left, list);
+  }
+  list.push(node.value);
+  if (node.right) {
+    traverseInorder(node.right, list);
+  }
+  return list;
+}
+
+function traversePreOrder(node, list) {
+  list.push(node.value);
+  if (node.left) {
+    traversePreOrder(node.left, list);
+  }
+  if (node.right) {
+    traversePreOrder(node.right, list);
+  }
+  return list;
 }
 
 const tree = new BinarySearchTree();
@@ -99,7 +141,7 @@ tree.insert(170);
 tree.insert(15);
 tree.insert(1);
 tree.remove(170);
-console.log("TREEE", tree.breadthFirstSearch());
+console.log("TREEE", tree.dfsPreOrder());
 // console.log(tree.lookup(9));
 //     9
 //  4     20
